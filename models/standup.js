@@ -9,6 +9,14 @@ const requiredStringValidator = [
   "{PATH} can't be empty"
 ];
 
+const sizeValidation = [
+  val => {
+    let testVal = val.trim();
+    return testVal.length > 0 && testVal.length <= 50;
+  },
+  "{PATH} character length should not be less than 0 or greater that 50"
+];
+
 const standupSchema = new mongoose.Schema({
   teamMemberId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -17,7 +25,7 @@ const standupSchema = new mongoose.Schema({
   teamMember: {
     type: String,
     required: true,
-    validate: requiredStringValidator
+    validate: sizeValidation
   },
   project: {
     type: String,
